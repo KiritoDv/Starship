@@ -7,6 +7,7 @@
 #define INIT_EVENT_IDS
 #include "port/hooks/Events.h"
 
+#include "SlotMachineBoss.h"
 bool gBackToMap = false;
 
 void OnDisplayUpdatePost(IEvent* event) {
@@ -300,6 +301,7 @@ void OnLivesCounterDraw(IEvent* ev){
     if(!restore){
         return;
     }
+
     ev->cancelled = true;
 
     if (gPlayState == PLAY_PAUSE || gCurrentLevel == LEVEL_TRAINING) {
@@ -327,6 +329,8 @@ void PortEnhancements_Init() {
     REGISTER_LISTENER(PlayerActionBoostEvent, OnPlayerBoost, EVENT_PRIORITY_NORMAL);
     REGISTER_LISTENER(PlayerActionBrakeEvent, OnPlayerBrake, EVENT_PRIORITY_NORMAL);
     REGISTER_LISTENER(PlayerActionPostShootEvent, OnPlayerShootPost, EVENT_PRIORITY_NORMAL);
+
+    SlotMachine_Register();
 }
 
 void PortEnhancements_Register() {

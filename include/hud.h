@@ -12,3 +12,5 @@ static const ALIGN_ASSET(2) char sBoostGaugeArrow5[] = "__OTR__assets/textures/h
 static const ALIGN_ASSET(2) char sBoostGaugeArrow6[] = "__OTR__assets/textures/hud/sBoostGaugeArrow6";
 static const ALIGN_ASSET(2) char sBoostGaugeArrow7[] = "__OTR__assets/textures/hud/sBoostGaugeArrow7";
 static const ALIGN_ASSET(2) char sBoostGaugeArrow8[] = "__OTR__assets/textures/hud/sBoostGaugeArrow8";
+
+static const ALIGN_ASSET(2) char aNewBomb[] = "__OTR__assets/slot/aSlotMachine";
