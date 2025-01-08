@@ -4,36 +4,40 @@
 #include "assets/ast_blue_marine.h"
 #include "hud.h"
 
+#define BOSS_STATE boss->state
+#define BOSS_SCALE boss->fwork[0]
+#define BOSS_TARGET_XPOS boss->fwork[1]
+#define BOSS_TARGET_YPOS boss->fwork[2]
+#define BOSS_DISTANCE boss->fwork[3]
+
 void SlotMachine_Init(Boss* boss){
+    BOSS_DISTANCE = 1500.0f;
+    BOSS_SCALE = 2.0f;
+    BOSS_STATE = 0;
+
     gBossActive = true;
     gBossFrameCount = 0;
-
     boss->drawShadow = true;
     boss->timer_050 = 354;
-    boss->health = 601;
-    boss->fwork[18] = -gArwingSpeed - 10.0f;
-    boss->obj.pos.z = gPlayer[0].trueZpos + 2000.0f;
+    boss->health = 2000;
+    boss->obj.pos.x = gPlayer[0].pos.x;
+    boss->obj.pos.y = gPlayer[0].pos.y;
+    boss->obj.pos.z = gPlayer[0].trueZpos - BOSS_DISTANCE;
+    boss->vel.z = gPlayer[0].vel.z;
+    boss->info.drawType = 1;
 }
 
-void SlotMachine_Update(Boss* boss){
+void SlotMachine_Update(Boss* boss) {
     Vec3f src;
     Vec3f dest;
     gBossFrameCount++;
 
-    boss->info.drawType = 1;
 
-    src.x = 0.0f;
-    src.y = 0.0f;
-    src.z = 60.0f;
-
-    Matrix_MultVec3f(gCalcMatrix, &src, &dest);
-
+    // Generic update
     boss->vel.x = dest.x;
     boss->vel.y = dest.y;
     boss->vel.z = dest.z - gPathVelZ;
-
-    boss->fwork[16] = 4.0f;
-    boss->vel.z = boss->fwork[18];
+    boss->obj.pos.z = gPlayer[0].trueZpos - BOSS_DISTANCE + ((gPlayer[0].boostSpeed + gPlayer->baseSpeed) * 10); 
 }
 
 void SlotMachine_Draw(Boss* boss){
